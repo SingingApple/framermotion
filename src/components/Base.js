@@ -18,6 +18,12 @@ const Base = ({ addBase, pizza }) => {
         duration: 2,
       },
     },
+    exit: {
+      x: "-100vw",
+      transition: {
+        ease: "easeInOut",
+      },
+    },
   };
   const buttonVariants = {
     visible: {
@@ -51,6 +57,7 @@ const Base = ({ addBase, pizza }) => {
       variants={containerVariants}
       initial="hidden"
       animate="visible"
+      exit="exit"
     >
       <h3>Step 1: Choose Your Base</h3>
       <ul>
