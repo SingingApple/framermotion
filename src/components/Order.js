@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 const containerVariants = {
   hidden: {
@@ -44,8 +44,13 @@ const buttonVariants = {
     },
   },
 };
-const Order = ({ pizza }) => {
+const Order = ({ pizza, setShowModal }) => {
   const [showTitle, setShowTitle] = useState(true);
+  useEffect(() => {
+    setTimeout(() => {
+      setShowModal(true);
+    }, 4000);
+  }, [setShowModal]);
   setTimeout(() => {
     setShowTitle(false);
   }, 4000);
