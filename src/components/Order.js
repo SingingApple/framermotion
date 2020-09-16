@@ -1,5 +1,5 @@
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 const containerVariants = {
   hidden: {
     opacity: 0,
@@ -14,7 +14,7 @@ const containerVariants = {
       mass: 0.4,
       damping: 8,
       when: "beforeChildren",
-      staggerChildren: 0.4,
+      staggerChildren: 0.4, //Initiates 0.4s after parent
     },
   },
 };
@@ -26,7 +26,29 @@ const childVariants = {
     opacity: 1,
   },
 };
+const buttonVariants = {
+  visible: {
+    x: -20,
+    transition: {
+      delay: 2,
+    },
+  },
+  hover: {
+    scale: 1.1,
+    textShadow: "0px 0px 8px rgb(255,255,255)",
+    boxShadow: "0px 0px 8px rgb(255,255,255)",
+    transition: {
+      //yoyo: 10,
+      duration: 0.3,
+      yoyo: Infinity,
+    },
+  },
+};
 const Order = ({ pizza }) => {
+  const [showTitle, setShowTitle] = useState(true);
+  setTimeout(() => {
+    setShowTitle(false);
+  }, 4000);
   return (
     <motion.div
       className="container order"
@@ -34,7 +56,11 @@ const Order = ({ pizza }) => {
       initial="hidden"
       animate="visible"
     >
-      <h2>Thank you for your order :)</h2>
+      <AnimatePresence>
+        {showTitle && (
+          <motion.h2 exit={{ y: -1000 }}>Thank you for your order :</motion.h2>
+        )}
+      </AnimatePresence>
       <motion.p variants={childVariants}>
         You ordered a {pizza.base} pizza with:
       </motion.p>
